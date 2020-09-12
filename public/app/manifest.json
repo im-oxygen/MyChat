@@ -1,0 +1,14 @@
+{
+    "name": "MyChat",
+    "short_name": "MyChat",
+    "description": "My Chat.",
+    "display": "standalone",
+    "start_url": "/",
+    "theme_color": "#009688",
+    "background_color": "#009688",
+    "icons": [{
+        "src": "https://cdn.jsdelivr.net/gh/im-oxygen/cdn_resource@1.0/mychat.png",
+        "sizes": "822x822",
+        "type": "image/png"
+    }]
+}

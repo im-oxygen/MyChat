@@ -1,0 +1,25 @@
+{
+    "name": "sixchat",
+    "version": "1.0.0",
+    "main": "bin/App.js",
+    "license": "MIT",
+    "dependencies": {
+        "@iarna/toml": "^2.2.5",
+        "@koa/router": "^9.4.0",
+        "axios": "^0.20.0",
+        "cli-color": "^2.0.0",
+        "fs-extra": "^9.0.1",
+        "koa": "^2.13.0",
+        "koa-body": "^4.2.0",
+        "koa-compress": "^5.0.1",
+        "koa-favicon": "^2.1.0",
+        "koa-socket-2": "^1.2.0",
+        "loglevel": "^1.7.0",
+        "loglevel-plugin-prefix": "^0.8.4",
+        "sqlite": "^4.0.14",
+        "sqlite3": "^5.0.0"
+    },
+    "devDependencies": {
+        "readline-sync": "^1.4.10"
+    }
+}

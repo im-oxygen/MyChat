@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="MyChat" />
+
+    <meta name="author" content="Oxygen" />
+    <meta name="theme-color" content="#009688" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="manifest" href="/pwa/manifest.json" />
+
+    <title>MyChat</title>
+    <!--
+    <script src="/srv/res/?type=script&name=frontend.autorem"></script>
+    <script src="/srv/res/?type=script&name=vue.min"></script>
+    <script src="/srv/res/?type=script&name=axios"></script>
+    <script src="/srv/res/?type=script&name=socketio"></script>
+    <script src="/srv/res/?type=script&name=frontend.init" defer></script>
+    -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="prefetch" href="https://cdn.jsdelivr.net/npm/socket.io-client@2.3.0/dist/socket.io.slim.js" integrity="sha256-Dul4c09cdrWKXVtallPxF558lwxMwCC8dXJdZ0PVW54=" integrity="sha512-hcPg/5yQzb6Ocz2NHy+XdRfmET1kTOtZc1l6Yt2TyriHW6WpK80hoLfaKG5wI7SqLt/x6IiV9kRoInYCA/BEWw=="
+        crossorigin="anonymous" as="script" />
+    <link rel="prefetch" href="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js" integrity="sha256-KSlsysqp7TXtFo/FHjb1T9b425x3hrvzjMWaJyKbpcI=" crossorigin="anonymous" as="script" />
+    <link rel="prefetch" href="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/css/mdui.min.css" integrity="sha256-Ng3P8foP07jpnUFcAiekbZNxnAztIhbY/YE7qDYH2Pk=" crossorigin="anonymous" as="style" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/css/mdui.min.css" integrity="sha256-Ng3P8foP07jpnUFcAiekbZNxnAztIhbY/YE7qDYH2Pk=" crossorigin="anonymous" media="all" onload="if(media!='all')media='all'" />
+
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2.3.0/dist/socket.io.slim.js" integrity="sha256-Dul4c09cdrWKXVtallPxF558lwxMwCC8dXJdZ0PVW54=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js" integrity="sha256-KSlsysqp7TXtFo/FHjb1T9b425x3hrvzjMWaJyKbpcI=" crossorigin="anonymous" defer></script>
+    <script src="/srv/res/?type=script&name=frontend.autorem"></script>
+    <script src="/srv/res/?type=script&name=frontend.init" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/js/mdui.min.js" integrity="sha256-yZDVNJKUgE4A7uGn33A8XGP3fiALjOiUNILWcczo+vk=" crossorigin="anonymous" defer></script>
+
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .login-box {
+            background-color: white;
+            width: 4.5rem;
+            min-height: 7rem;
+            border: 50px;
+            padding: 50px;
+            margin-right: 1rem;
+            margin-left: 1rem;
+            margin: -1rem;
+            border-radius: 6px;
+        }
+        
+        body {
+            background: url("/srv/res/?type=image&name=bing");
+            background-size: auto;
+        }
+    </style>
+</head>
+
+<body class="mdui-theme-primary-teal mdui-theme-layout-light" style="display: none">
+    <header>
+        <div class="mdui-appbar mdui-shadow-2 mdui-color-theme">
+            <div class="mdui-toolbar">
+                <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a
+          >
+          <p class="mdui-typo-title">MyChat</p>
+          <div class="mdui-toolbar-spacer"></div>
+          <a href="javascript:location.reload();" class="mdui-btn mdui-btn-icon"
+            ><i class="mdui-icon material-icons">refresh</i></a
+          >
+
+          <a href="javascript:;" class="mdui-btn mdui-btn-icon"
+            ><i class="mdui-icon material-icons">more_vert</i></a
+          >
+        </div>
+      </div>
+    </header>
+    <div class="mdui-container-fluid" style="margin-top: 1.5rem" id="app">
+      <div class="bg"></div>
+      <div class="login-box mdui-shadow-3 mdui-center">
+        <div class="mdui-textfield">
+          <textarea
+            class="mdui-textfield-input"
+            rows="21"
+            placeholder="Messages"
+            id="message"
+            v-model="view_msg"
+            onpropertychange="this.scrollTop = this.scrollHeight "
+            οnfοcus="this.scrollTop = this.scrollHeight "
+            readonly
+          >
+          </textarea>
+        </div>
+        <div style="margin-top: 0.15rem"></div>
+
+        <div class="mdui-textfield">
+          <i class="mdui-icon material-icons">account_circle</i>
+          <label class="mdui-textfield-label">Nickname</label>
+          <input
+            class="mdui-textfield-input"
+            type="text"
+            v-model="input_name"
+          />
+        </div>
+        <div class="mdui-textfield">
+          <i class="mdui-icon material-icons">message</i>
+          <label class="mdui-textfield-label">Message</label>
+          <input
+            class="mdui-textfield-input"
+            type="text"
+            v-model="input_msg"
+            id="__input"
+            required
+          />
+        </div>
+        <button
+          class="mdui-btn mdui-btn-block mdui-btn-raised mdui-ripple mdui-color-teal"
+          style="margin-top: 0.35rem"
+          @click="send_msg()"
+          @keyup.enter="send_msg()"
+        >
+          Send
+        </button>
+      </div>
+    </div>
+
+    <div style="margin-top: 0.2rem"></div>
+  </body>
+</html>

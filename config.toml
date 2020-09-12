@@ -1,0 +1,9 @@
+[server]
+port = "8970"
+
+[server.database]
+type = "sqlite3"
+files = { history = "./data/messages.db" }
+
+[settings]
+favicon = "./public/favicon.ico"
